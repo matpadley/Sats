@@ -1,0 +1,22 @@
+@model ArithmeticQuestion
+
+<div>
+    <h1 style="font-size: 24px;">Arithmetic Question</h1>
+    <p style="font-size: 24px;">@Model.Operand1 @Model.Operator @Model.Operand2 = ?</p>
+
+    <p id="answer" style="display: none; font-size: 24px;">Answer: @Model.Answer</p>
+
+    <button id="revealButton" style="font-size: 24px;">Reveal Answer</button>
+
+    <form method="post" asp-action="Index" asp-controller="Question">
+        <input type="submit" value="Generate New Question" style="font-size: 24px;" />
+    </form>
+</div>
+
+@section Scripts {
+<script>
+    document.getElementById('revealButton').addEventListener('click', function() {
+        document.getElementById('answer').style.display = 'block';
+    });
+</script>
+}

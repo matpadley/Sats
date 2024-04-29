@@ -1,0 +1,48 @@
+@model List<ArithmeticQuestion>
+
+
+<div>
+    <div id="timer"></div>
+    <button id="startButton">Start</button>
+    
+    <h1 style="font-size: 24px;">Arithmetic Questions</h1>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <p style="font-size: 24px;">@Model[i].Operand1 @Model[i].Operator @Model[i].Operand2 = ?</p>
+        <p id="answer-@i" style="display: none; font-size: 24px;">Answer: @Model[i].Answer</p>
+        <!--<button id="revealButton-@i" style="font-size: 24px;">Reveal Answer</button>-->
+    }
+
+    <form method="post" asp-action="Multiple" asp-controller="Question">
+        <input type="submit" value="Generate New Questions" style="font-size: 24px;"/>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        var time = 30 * 60; // 30 minutes in seconds
+        var timerDisplay = document.getElementById('timer');
+        var startButton = document.getElementById('startButton');
+        var intervalId;
+
+        function formatTime(seconds) {
+            var minutes = Math.floor(seconds / 60);
+            var remainingSeconds = seconds % 60;
+            if (remainingSeconds < 10) {
+                remainingSeconds = "0" + remainingSeconds;  // zero padding on seconds
+            }
+            return minutes + ":" + remainingSeconds;
+        }
+
+        startButton.addEventListener('click', function() {
+            intervalId = setInterval(function() {
+                timerDisplay.textContent = formatTime(time);
+                time--;
+
+                if (time < 0) {
+                    clearInterval(intervalId);
+                }
+            }, 1000);
+        });
+    </script>
+}
