@@ -34,7 +34,7 @@
                 </div>
             </div>
                 
-                <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer.ToString("N0")</p>
+                <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer</p>
             }
 
             <div style="display: flex; justify-content: start; gap: 10px;">
@@ -59,7 +59,7 @@
 
 @section Scripts {
     <script>
-        var time = 30 * 60; // 30 minutes in seconds
+        var time = 1 * 60; // 30 minutes in seconds
         var timerDisplay = document.getElementById('timer');
         var startButton = document.getElementById('startButton');
         var intervalId;
