@@ -6,28 +6,28 @@ public class FractionsQuestion: ArithmaticBase
     {
         var random = new Random();
         Operator = Operators[random.Next(Operators.Length)];
-        Numerator1 = random.Next(1, 10);
-        Denominator1 = random.Next(1, 10);
-        Numerator2 = random.Next(1, 10);
-        Denominator2 = random.Next(1, 10);
+        LeftNumerator = random.Next(1, 10);
+        LeftDenominator = random.Next(1, 10);
+        RightNumerator = random.Next(1, 10);
+        RightDenominator = random.Next(1, 10);
         
         switch (Operator)
         {
             case "+":
-                AnswerNumerator = Numerator1 * Denominator2 + Numerator2 * Denominator1;
-                AnswerDenominator = Denominator1 * Denominator2;
+                AnswerNumerator = LeftNumerator * RightDenominator + RightNumerator * LeftDenominator;
+                AnswerDenominator = LeftDenominator * RightDenominator;
                 break;
             case "-":
-                AnswerNumerator = Numerator1 * Denominator2 - Numerator2 * Denominator1;
-                AnswerDenominator = Denominator1 * Denominator2;
+                AnswerNumerator = LeftNumerator * RightDenominator - RightNumerator * LeftDenominator;
+                AnswerDenominator = LeftDenominator * RightDenominator;
                 break;
             case "x":
-                AnswerNumerator = Numerator1 * Numerator2;
-                AnswerDenominator = Denominator1 * Denominator2;
+                AnswerNumerator = LeftNumerator * RightNumerator;
+                AnswerDenominator = LeftDenominator * RightDenominator;
                 break;
             case "/":
-                AnswerNumerator = Numerator1 * Denominator2;
-                AnswerDenominator = Denominator1 * Numerator2;
+                AnswerNumerator = LeftNumerator * RightDenominator;
+                AnswerDenominator = LeftDenominator * RightNumerator;
                 break;
         }
         // correct the answer to the simplest form
@@ -48,10 +48,10 @@ public class FractionsQuestion: ArithmaticBase
     }
     
     // create a new model that will allow the same at ArithmeticQuestion, but for fractions
-    public int Numerator1 { get; }
-    public int Denominator1 { get; }
-    public int Numerator2 { get; }
-    public int Denominator2 { get; }
+    public int LeftNumerator { get; }
+    public int LeftDenominator { get; }
+    public int RightNumerator { get; }
+    public int RightDenominator { get; }
     public string? Operator { get; }
     public int AnswerNumerator { get; }
     public int AnswerDenominator { get; }
