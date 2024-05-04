@@ -11,6 +11,11 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+
+        # add premission to push to container registry
+        permissions:
+            contents: read
+            packages: write
     
         steps:
         - name: Checkout
