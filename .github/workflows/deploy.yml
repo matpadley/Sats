@@ -6,6 +6,9 @@ on:
   release:
     types: [created]
 
+env:
+  PACKAGE_NAME: ewans-sats
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -39,4 +42,4 @@ jobs:
             file: ./Dockerfile
             platforms: linux/amd64
             push: true
-            tags: ghcr.io/${{ github.repository_owner }}/my-image:${{ github.event.release.tag_name }}
+            tags: ghcr.io/${{ github.repository_owner }}/${{ env.PACKAGE_NAME }}:${{ github.event.release.tag_name }}
