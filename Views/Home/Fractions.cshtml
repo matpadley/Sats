@@ -43,24 +43,19 @@
                     <p>=</p>
                 </div>
                 <div class="col-5">
-                    <div class="fraction-row">
+                    <div class="fraction-row hidden">
                         <div class="fraction">
                             <p class="numerator question-number">@Model[i].AnswerNumerator</p>
                             <p class="denominator question-number">@Model[i].AnswerDenominator</p>
                         </div>
                     </div>
-                    <input
-                        style="width: 100%"
-                        type="text"
-                        id="answer-input-@i"
-                        class="answer-input display-1 form-control form-control-lg"/>
                 </div>
             </div>
-                
+            <hr/>
         }
 
         <div style="display: flex; justify-content: start; gap: 10px;">
-            <form method="post" asp-action="Index" asp-controller="Fraction">
+            <form method="post" asp-action="Fractions" asp-controller="Home">
                 <input type="submit" value="Generate New Questions" class="btn btn-primary" onclick="return confirm('Are you sure you want to generate new questions?');" />
             </form>
 
@@ -99,10 +94,9 @@
         document.getElementById('revealAllButton').addEventListener('click', function() {
             var password = prompt("Please enter the password to reveal all answers:");
             if (password === "REVEAL") {
-                for (var i = 0; i < @Model.Count; i++) {
-                    var answer = document.getElementById('answer-' + i).textContent.replace('Answer: ', '');
-                    var answerInput = document.getElementById('answer-input-' + i);
-                    answerInput.value = answer;
+                var fractions = document.getElementsByClassName('fraction-row');
+                for (var i = 0; i < fractions.length; i++) {
+                    fractions[i].classList.remove('hidden');
                 }
             } else {
                 alert("Incorrect password. The answers will not be revealed.");

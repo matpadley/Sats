@@ -6,10 +6,10 @@ public class FractionsQuestion: ArithmaticBase
     {
         var random = new Random();
         Operator = Operators[random.Next(Operators.Length)];
-        Numerator1 = 2;//random.Next(1, 10);
-        Denominator1 = 4;//random.Next(1, 10);
-        Numerator2 = 3;//random.Next(1, 10);
-        Denominator2 = 4;//random.Next(1, 10);
+        Numerator1 = random.Next(1, 10);
+        Denominator1 = random.Next(1, 10);
+        Numerator2 = random.Next(1, 10);
+        Denominator2 = random.Next(1, 10);
         
         switch (Operator)
         {
@@ -30,6 +30,21 @@ public class FractionsQuestion: ArithmaticBase
                 AnswerDenominator = Denominator1 * Numerator2;
                 break;
         }
+        // correct the answer to the simplest form
+        int gcd = GCD(AnswerNumerator, AnswerDenominator);
+        AnswerNumerator /= gcd;
+        AnswerDenominator /= gcd;
+    }
+    
+    private int GCD(int a, int b)
+    {
+        while (b != 0)
+        {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
     }
     
     // create a new model that will allow the same at ArithmeticQuestion, but for fractions

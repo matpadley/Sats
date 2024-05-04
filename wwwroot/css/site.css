@@ -60,3 +60,7 @@ body {
 .fraction .numerator {
   border-bottom: 1px solid black;
 }
+
+.hidden {
+  display: none;
+}
