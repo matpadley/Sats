@@ -2,11 +2,9 @@
 name: Deploy
 
 on:
+# add to run when a release is created
   release:
-    types: [published]
-  push:
-    branches:
-        - master
+    types: [created]
 
 jobs:
     build:
@@ -41,4 +39,4 @@ jobs:
             file: ./Dockerfile
             platforms: linux/amd64
             push: true
-            tags: ghcr.io/${{ github.repository_owner }}/my-image:latest
+            tags: ghcr.io/${{ github.repository_owner }}/my-image:${{ github.event.release.tag_name }}
