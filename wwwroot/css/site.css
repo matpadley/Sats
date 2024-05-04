@@ -48,3 +48,15 @@ body {
 .question-row {
   padding-bottom: 20px;
 }
+
+.fraction {
+  text-align: center;
+}
+
+.fraction .denominator {
+  margin: 0;
+}
+
+.fraction .numerator {
+  border-bottom: 1px solid black;
+}

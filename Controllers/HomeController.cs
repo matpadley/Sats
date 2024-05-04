@@ -14,7 +14,17 @@ public class HomeController : Controller
         var questions = new List<ArithmeticQuestion>();
         for (int i = 0; i < 36; i++)
         {
-            questions.Add(_questionService.GenerateQuestion());
+            questions.Add(new ArithmeticQuestion());
+        }
+        return View(questions);
+    }
+    
+    public ActionResult Fractions()
+    {
+        var questions = new List<FractionsQuestion>();
+        for (int i = 0; i < 36; i++)
+        {
+            questions.Add(_questionService.GenerateFractionsQuestion());
         }
         return View(questions);
     }
