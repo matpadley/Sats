@@ -1,7 +1,6 @@
 @model List<ArithmeticQuestion>
 
 
-<div>
     <div class="row">
         <div class="col-11">
             <h1 style="font-size: 24px;">Arithmetic Questions</h1>
@@ -12,8 +11,8 @@
                     <div class="col-1">
                         <p class="display-5">@questionId:</p>
                     </div>
-                    <div class="col-4">
-                        <p class="display-1" style="margin: 0;">
+                    <div class="col-5">
+                        <p class="display-3" style="margin: 0;">
                             @Model[i].Operand1.ToString("N0")
                             @Model[i].Operator
                             @Model[i].Operand2.ToString("N0")
@@ -22,8 +21,12 @@
                     <div class="col-1">
                         <p>=</p>
                     </div>
-                    <div class="col-2">
-                        <input type="text" id="answer-input-@i" class="answer-input display-1"/>
+                    <div class="col-5">
+                        <input 
+                            style="width: 100%" 
+                            type="text"
+                            id="answer-input-@i" 
+                            class="answer-input display-1 form-control form-control-lg"/>
                     </div>
                 </div>
                 
@@ -36,6 +39,8 @@
                 </form>
 
                 <button id="revealAllButton" class="btn btn-outline-primary">Reveal All Answers</button>
+                <!-- Add this button in the HTML -->
+                <button id="markAnswersButton" class="btn btn-outline-primary">Mark Answers</button>
                 
             </div>
         </div>
@@ -46,7 +51,6 @@
             </div>
         </div>
     </div>
-</div>
 
 @section Scripts {
     <script>
@@ -95,6 +99,22 @@
                 }, 1000);
             } else {
                 startButton.textContent = 'Start';
+            }
+});
+
+        // Add this in the JavaScript section
+        document.getElementById('markAnswersButton').addEventListener('click', function() {
+            var confirmMark = confirm("Do you wish to mark the answers?");
+            if (confirmMark) {
+                for (var i = 0; i < @Model.Count; i++) {
+                    var answer = document.getElementById('answer-' + i).textContent.replace('Answer: ', '');
+                    var answerInput = document.getElementById('answer-input-' + i);
+                    if (answerInput.value === answer) {
+                        answerInput.style.backgroundColor = "green";
+                    } else {
+                        answerInput.style.backgroundColor = "red";
+                    }
+                }
             }
 });
     </script>
