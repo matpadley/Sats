@@ -7,19 +7,8 @@ namespace Sats.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly QuestionService _questionService;
+    private readonly QuestionService _questionService = new();
 
-    public HomeController()
-    {
-        _questionService = new QuestionService();
-    }
-/*
-    public ActionResult Index()
-    {
-        var question = _questionService.GenerateQuestion();
-        return View(question);
-    }
-  */  
     public ActionResult Index()
     {
         var questions = new List<ArithmeticQuestion>();

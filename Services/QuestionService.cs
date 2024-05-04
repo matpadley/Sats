@@ -1,3 +1,5 @@
+using Sats.Models;
+
 namespace Sats.Services;
 
 public class QuestionService
