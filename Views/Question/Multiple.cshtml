@@ -82,6 +82,24 @@
             }
 });
 
+        function markAnswers() {
+            var correctCount = 0;
+            var incorrectCount = 0;
+            for (var i = 0; i < @Model.Count; i++) {
+                var answer = document.getElementById('answer-' + i).textContent.replace('Answer: ', '');
+                var answerInput = document.getElementById('answer-input-' + i);
+                if (answerInput.value === answer) {
+                    answerInput.style.backgroundColor = "#62D809";
+                    correctCount++;
+                } else {
+                    answerInput.style.backgroundColor = "#FE7676";
+                    incorrectCount++;
+                    // Display the correct answer next to the original one in brackets for incorrect answers
+                    answerInput.value = answerInput.value + " (Correct: " + answer + ")";
+                }
+            }
+            document.getElementById('marks').textContent = "Correct: " + correctCount + ", Incorrect: " + incorrectCount;
+        }
 
         startButton.addEventListener('click', function() {
             if (startButton.textContent === 'Start') {
@@ -96,6 +114,15 @@
 
                     if (time < 0) {
                         clearInterval(intervalId);
+                        // Disable the text inputs
+                        var inputs = document.getElementsByClassName('answer-input');
+                        for (var i = 0; i < inputs.length; i++) {
+                            inputs[i].disabled = true;
+                        }
+                        // Show a popup saying 'Time's Up'
+                        alert("Time's Up");
+                        // Carry out the same actions as the markAnswersButton
+                        markAnswers();
                     }
                 }, 1000);
             } else {
@@ -103,26 +130,10 @@
             }
 });
 
-
         document.getElementById('markAnswersButton').addEventListener('click', function() {
             var confirmMark = confirm("Do you wish to mark the answers?");
             if (confirmMark) {
-                var correctCount = 0;
-                var incorrectCount = 0;
-                for (var i = 0; i < @Model.Count; i++) {
-                    var answer = document.getElementById('answer-' + i).textContent.replace('Answer: ', '');
-                    var answerInput = document.getElementById('answer-input-' + i);
-                    if (answerInput.value === answer) {
-                        answerInput.style.backgroundColor = "#62D809";
-                        correctCount++;
-                    } else {
-                        answerInput.style.backgroundColor = "#FE7676";
-                        incorrectCount++;
-                        // Display the correct answer next to the original one in brackets for incorrect answers
-                        answerInput.value = answerInput.value + " (Correct: " + answer + ")";
-                    }
-                }
-                document.getElementById('marks').textContent = "Correct: " + correctCount + ", Incorrect: " + incorrectCount;
+                markAnswers();
             }
 });
     </script>
