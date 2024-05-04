@@ -3,30 +3,43 @@
 
 <div>
     <div class="row">
-        <div class="col-10">
+        <div class="col-11">
             <h1 style="font-size: 24px;">Arithmetic Questions</h1>
             @for (int i = 0; i < Model.Count; i++)
             {
             var questionId = i + 1;
-            <p class="display-1">
-                <span class="question-number">@questionId</span>
-                @Model[i].Operand1.ToString("N0")
-                @Model[i].Operator
-                @Model[i].Operand2.ToString("N0")
-                = <input type="text" id="answer-input-@i" class="answer-input" />
-            </p>
-            <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer.ToString("N0")</p>
+                <div class="row question-row">
+                    <div class="col-1">
+                        <p class="display-5">@questionId:</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="display-1" style="margin: 0;">
+                            @Model[i].Operand1.ToString("N0")
+                            @Model[i].Operator
+                            @Model[i].Operand2.ToString("N0")
+                        </p>
+                    </div>
+                    <div class="col-1">
+                        <p>=</p>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="answer-input-@i" class="answer-input display-1"/>
+                    </div>
+                </div>
+                
+                <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer.ToString("N0")</p>
             }
 
             <div style="display: flex; justify-content: start; gap: 10px;">
                 <form method="post" asp-action="Multiple" asp-controller="Question">
-                    <input type="submit" value="Generate New Questions" class="btn btn-primary"/>
+                    <input type="submit" value="Generate New Questions" class="btn btn-primary" onclick="return confirm('Are you sure you want to generate new questions?');" />
                 </form>
 
                 <button id="revealAllButton" class="btn btn-outline-primary">Reveal All Answers</button>
+                
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-1">
             <div id="button-timer-container">
                 <button id="startButton" class="btn btn-primary">Start</button>
                 <div id="timer" class="h1"></div>
