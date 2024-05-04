@@ -29,10 +29,18 @@ body {
   z-index: 100; /* This will make sure the timer floats over the scrolling content */
 }
 
+
 #startButton {
   position: fixed;
   top: 160px; /* Adjust this value based on the height of your timer */
   right: 10px;
   font-size: 24px; /* 4 times the current size of 24px */
   z-index: 100; /* This will make sure the button floats over the scrolling content */
+}
+
+
+#button-timer-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }

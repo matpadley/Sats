@@ -2,19 +2,26 @@
 
 
 <div>
-    <button id="startButton">Start</button>
-    <div id="timer"></div>
+    <div id="button-timer-container">
+        <button id="startButton" class="btn btn-primary">Start</button>
+        <div id="timer" class="h1"></div>
+    </div>
     <h1 style="font-size: 24px;">Arithmetic Questions</h1>
     @for (int i = 0; i < Model.Count; i++)
     {
-        <p style="font-size: 48px;">@Model[i].Operand1 @Model[i].Operator @Model[i].Operand2 = ?</p>
-        <p id="answer-@i" style="display: none; font-size: 24px;">Answer: @Model[i].Answer</p>
+        <p class="display-1">@Model[i].Operand1.ToString("N0") @Model[i].Operator @Model[i].Operand2.ToString("N0") = ?</p>
+        <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer.ToString("N0")</p>
         <!--<button id="revealButton-@i" style="font-size: 24px;">Reveal Answer</button>-->
     }
 
-    <form method="post" asp-action="Multiple" asp-controller="Question">
-        <input type="submit" value="Generate New Questions" style="font-size: 24px;"/>
-    </form>
+    <div style="display: flex; justify-content: start; gap: 10px;">
+        <form method="post" asp-action="Multiple" asp-controller="Question">
+            <input type="submit" value="Generate New Questions" class="btn btn-primary"/>
+        </form>
+
+        <button id="revealAllButton" class="btn btn-outline-primary">Reveal All Answers</button>
+    </div>
+
 </div>
 
 @section Scripts {
@@ -32,7 +39,15 @@
             }
             return minutes + ":" + remainingSeconds;
         }
-
+        
+        document.getElementById('revealAllButton').addEventListener('click', function() {
+            for (var i = 0; i < @Model.Count; i++) {
+                var answer = document.getElementById('answer-' + i).textContent.replace('Answer: ', '');
+                var question = document.getElementById('question-' + i);
+                question.textContent = question.textContent.replace('?', answer);
+            }
+        });
+        
         startButton.addEventListener('click', function() {
             if (startButton.textContent === 'Start') {
                 startButton.textContent = 'Stop';
