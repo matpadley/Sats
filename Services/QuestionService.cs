@@ -1,5 +1,6 @@
-public class QuestionService
+namespace Sats.Services;
 
+public class QuestionService
 {
     private static readonly string[] Operators = { "+", "-", "x", "/" };
 
@@ -19,6 +20,13 @@ public class QuestionService
                 question.Answer = question.Operand1 + question.Operand2;
                 break;
             case "-":
+                // Ensure the answer is always positive
+                if (question.Operand1 < question.Operand2)
+                {
+                    var temp = question.Operand1;
+                    question.Operand1 = question.Operand2;
+                    question.Operand2 = temp;
+                }
                 question.Answer = question.Operand1 - question.Operand2;
                 break;
             case "x":
