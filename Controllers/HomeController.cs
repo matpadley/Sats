@@ -1,23 +1,35 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Sats.Models;
+using Sats.Services;
 
 namespace Sats.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly QuestionService _questionService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController()
     {
-        _logger = logger;
+        _questionService = new QuestionService();
     }
-
-    public IActionResult Index()
+/*
+    public ActionResult Index()
     {
-        return View();
+        var question = _questionService.GenerateQuestion();
+        return View(question);
     }
-
+  */  
+    public ActionResult Index()
+    {
+        var questions = new List<ArithmeticQuestion>();
+        for (int i = 0; i < 36; i++)
+        {
+            questions.Add(_questionService.GenerateQuestion());
+        }
+        return View(questions);
+    }
+    
     public IActionResult Privacy()
     {
         return View();
@@ -28,4 +40,5 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
 }
