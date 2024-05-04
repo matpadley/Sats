@@ -31,7 +31,7 @@ public class FractionsQuestion: ArithmaticBase
                 break;
         }
         // correct the answer to the simplest form
-        int gcd = GCD(AnswerNumerator, AnswerDenominator);
+        var gcd = GCD(AnswerNumerator, AnswerDenominator);
         AnswerNumerator /= gcd;
         AnswerDenominator /= gcd;
     }
@@ -40,7 +40,7 @@ public class FractionsQuestion: ArithmaticBase
     {
         while (b != 0)
         {
-            int temp = b;
+            var temp = b;
             b = a % b;
             a = temp;
         }
