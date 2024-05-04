@@ -7,28 +7,28 @@
             @for (int i = 0; i < Model.Count; i++)
             {
             var questionId = i + 1;
-                <div class="row question-row">
-                    <div class="col-1">
-                        <p class="display-5">@questionId:</p>
-                    </div>
-                    <div class="col-5">
-                        <p class="display-3" style="margin: 0;">
-                            @Model[i].Operand1.ToString("N0")
-                            @Model[i].Operator
-                            @Model[i].Operand2.ToString("N0")
-                        </p>
-                    </div>
-                    <div class="col-1">
-                        <p>=</p>
-                    </div>
-                    <div class="col-5">
-                        <input 
-                            style="width: 100%" 
-                            type="text"
-                            id="answer-input-@i" 
-                            class="answer-input display-1 form-control form-control-lg"/>
-                    </div>
+            <div class="row question-row d-flex align-items-center">
+                <div class="col-1">
+                    <p class="display-5">@questionId:</p>
                 </div>
+                <div class="col-5">
+                    <p class="display-3" style="margin: 0;">
+                        @Model[i].Operand1.ToString("N0")
+                        @Model[i].Operator
+                        @Model[i].Operand2.ToString("N0")
+                    </p>
+                </div>
+                <div class="col-1">
+                    <p>=</p>
+                </div>
+                <div class="col-5">
+                    <input 
+                        style="width: 100%" 
+                        type="text"
+                        id="answer-input-@i" 
+                        class="answer-input display-1 form-control form-control-lg"/>
+                </div>
+            </div>
                 
                 <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer.ToString("N0")</p>
             }
@@ -48,6 +48,7 @@
             <div id="button-timer-container">
                 <button id="startButton" class="btn btn-primary">Start</button>
                 <div id="timer" class="h1"></div>
+                <div id="marks"></div>
             </div>
         </div>
     </div>
@@ -102,19 +103,26 @@
             }
 });
 
-        // Add this in the JavaScript section
+
         document.getElementById('markAnswersButton').addEventListener('click', function() {
             var confirmMark = confirm("Do you wish to mark the answers?");
             if (confirmMark) {
+                var correctCount = 0;
+                var incorrectCount = 0;
                 for (var i = 0; i < @Model.Count; i++) {
                     var answer = document.getElementById('answer-' + i).textContent.replace('Answer: ', '');
                     var answerInput = document.getElementById('answer-input-' + i);
                     if (answerInput.value === answer) {
-                        answerInput.style.backgroundColor = "green";
+                        answerInput.style.backgroundColor = "#62D809";
+                        correctCount++;
                     } else {
-                        answerInput.style.backgroundColor = "red";
+                        answerInput.style.backgroundColor = "#FE7676";
+                        incorrectCount++;
+                        // Display the correct answer next to the original one in brackets for incorrect answers
+                        answerInput.value = answerInput.value + " (Correct: " + answer + ")";
                     }
                 }
+                document.getElementById('marks').textContent = "Correct: " + correctCount + ", Incorrect: " + incorrectCount;
             }
 });
     </script>

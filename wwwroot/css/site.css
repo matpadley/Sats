@@ -32,9 +32,9 @@ body {
 
 
 #button-timer-container {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* optional: to ensure it stays on top of other elements */
 }
 
 .question-number {
