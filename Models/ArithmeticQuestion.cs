@@ -13,12 +13,12 @@ public class ArithmeticQuestion: ArithmaticBase
         switch (MathType)
         {
             case MathType.WholeNumber:
-                Operand1 = Math.Ceiling(Operand1 / 100);
-                Operand2 = Math.Ceiling(Operand2 / 100);
+                Operand1 = Math.Ceiling(Operand1);
+                Operand2 = Math.Ceiling(Operand2);
                 Operator = AllOperator[random.Next(AllOperator.Length)];
                 break;
             case MathType.Decimal:
-                Operator = DivideMultipler[random.Next(DivideMultipler.Length - 1)];
+                Operator = DecimalOperator[random.Next(DecimalOperator.Length - 1)];
                 break;
             default:
                 MathType = MathType.Percentage;
