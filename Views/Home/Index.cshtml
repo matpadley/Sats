@@ -17,9 +17,23 @@
                 </div>
                 <div class="col-5">
                     <p class="display-3" style="margin: 0;">
-                        @Model[i].Operand1.ToString("N0")
+                        @if (Model[i].IsWholeNumber)
+                        {
+                            @Model[i].Operand1.ToString("N0")
+                        }
+                        else
+                        {
+                            @Model[i].Operand1.ToString("N2")
+                        }
                         @Model[i].Operator
-                        @Model[i].Operand2.ToString("N0")
+                        @if (Model[i].IsWholeNumber)
+                        {
+                            @Model[i].Operand2
+                        }
+                        else
+                        {
+                            @Model[i].Operand2
+                        }
                     </p>
                 </div>
                 <div class="col-1">

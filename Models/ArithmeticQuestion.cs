@@ -5,9 +5,22 @@ public class ArithmeticQuestion: ArithmaticBase
     public ArithmeticQuestion()
     {
         var random = new Random();
-        Operator = Operators[random.Next(Operators.Length)];
-        Operand1 = random.Next(1, 10);
-        Operand2 = random.Next(1, 10);
+
+        Operand1 = Math.Round(random.NextDouble() * (1000 - 10) + 10, 2);
+        Operand2 = Math.Round(random.NextDouble() * (1000 - 10) + 10, 2);
+
+        IsWholeNumber = random.Next(2) == 1;
+
+        if (IsWholeNumber)
+        {
+            Operand1 =  Math.Ceiling(Operand1/100);
+            Operand2 =  Math.Ceiling(Operand2/100);
+            Operator = AllOperator[random.Next(AllOperator.Length)];
+        }
+        else
+        {
+            Operator = DivideMultipler[random.Next(DivideMultipler.Length - 1)];
+        }
         
         switch (Operator)
         {
@@ -33,9 +46,10 @@ public class ArithmeticQuestion: ArithmaticBase
         }
     }
     
-    public int Operand1 { get; }
-    public int Operand2 { get; }
+    public double Operand1 { get; }
+    public double Operand2 { get; }
     public string? Operator { get; }
-    public int Answer { get; }
+    public double Answer { get; }
+    public bool IsWholeNumber { get; }
 }
 

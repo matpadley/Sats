@@ -5,7 +5,7 @@ public class FractionsQuestion: ArithmaticBase
     public FractionsQuestion()
     {
         var random = new Random();
-        Operator = Operators[random.Next(Operators.Length)];
+        Operator = AllOperator[random.Next(AllOperator.Length)];
         LeftNumerator = random.Next(1, 10);
         LeftDenominator = random.Next(1, 10);
         RightNumerator = random.Next(1, 10);
