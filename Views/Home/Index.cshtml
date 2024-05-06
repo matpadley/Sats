@@ -25,7 +25,15 @@
                         {
                             @Model[i].Operand1.ToString("N0")
                         }
-                        @Model[i].Operator
+                        @if (Model[i].MathType == MathType.Percentage)
+                        {
+                            <span class="@Model[i].Operator display-6"> of</span>
+                        }
+                        else 
+                        {
+                            <span class="@Model[i].Operator display-6"></span>
+                        }
+                        
                         @if (Model[i].MathType == MathType.Decimal)
                         {
                             @Model[i].Operand2.ToString("N2")

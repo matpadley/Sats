@@ -30,7 +30,7 @@ public class ArithmeticQuestion: ArithmaticBase
         {
             Operand1 = Math.Round(Operand1, 0);
             Operand2 = Math.Round(Operand2, 0);
-            Operator = "% of";
+            Operator = "fa fa-percent";
             Answer = Math.Round(Operand1 / 100 * Operand2, 2);
         }
         else
@@ -39,6 +39,7 @@ public class ArithmeticQuestion: ArithmaticBase
             {
                 case "+":
                     Answer = Operand1 + Operand2;
+                    Operator = "fa fa-plus";
                     break;
                 case "-":
                     // Ensure the answer is always positive
@@ -46,17 +47,21 @@ public class ArithmeticQuestion: ArithmaticBase
                     {
                         (Operand1, Operand2) = (Operand2, Operand1);
                     }
+
                     Answer = Operand1 - Operand2;
+                    Operator = "fa fa-minus";
                     break;
                 case "x":
                     Answer = Operand1 * Operand2;
+                    Operator = "fa fa-times";
                     break;
                 case "/":
                     // Ensure we don't divide by zero and the division is exact
                     Operand1 *= Operand2;
                     Answer = Operand1 / Operand2;
+                    Operator = "fa fa-divide";
                     break;
-                }
+            }
         }
     }
     
