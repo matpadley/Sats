@@ -29,8 +29,9 @@ public class ArithmeticQuestion: ArithmaticBase
         if (MathType == MathType.Percentage)
         {
             Operand1 = Math.Round(Operand1, 0);
+            Operand2 = Math.Round(Operand2, 0);
             Operator = "% of";
-            Answer = (Operand1 / 100) * Operand2;
+            Answer = Math.Round(Operand1 / 100 * Operand2, 2);
         }
         else
         {
