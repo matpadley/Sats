@@ -4,5 +4,5 @@ public abstract class ArithmaticBase
 {
     
     protected static readonly string[] AllOperator = { "+", "-", "x", "/" };
-    protected static readonly string[] DivideMultipler = { "+", "-" };
+    protected static readonly string[] DecimalOperator = { "+", "-" };
 }

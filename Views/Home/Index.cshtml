@@ -17,22 +17,30 @@
                 </div>
                 <div class="col-5">
                     <p class="display-3" style="margin: 0;">
-                        @if ((Model[i].MathType == MathType.Decimal) || (Model[i].MathType == MathType.WholeNumber))
+                        @if ((Model[i].MathType == MathType.Decimal))
+                        {
+                            @Model[i].Operand1.ToString("N2")
+                        }
+                        else 
                         {
                             @Model[i].Operand1.ToString("N0")
                         }
-                        else
+                        @if (Model[i].MathType == MathType.Percentage)
                         {
-                            @Model[i].Operand1.ToString("N0")
+                            <span class="@Model[i].Operator display-6"> of</span>
                         }
-                        @Model[i].Operator
+                        else 
+                        {
+                            <span class="@Model[i].Operator display-6"></span>
+                        }
+                        
                         @if (Model[i].MathType == MathType.Decimal)
                         {
-                            @Model[i].Operand2
+                            @Model[i].Operand2.ToString("N2")
                         }
                         else
                         {
-                            @Model[i].Operand2
+                            @Model[i].Operand2.ToString("N0")
                         }
                     </p>
                 </div>
@@ -48,7 +56,7 @@
                 </div>
             </div>
                 
-            <p id="answer-@i" class="d-none h3">Answer: @Model[i].Answer</p>
+            <p id="answer-@i" class="d-none h3">Answer: @Math.Round(Model[i].Answer, 2)</p>
             
             <hr/>
             }
