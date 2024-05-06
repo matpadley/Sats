@@ -17,16 +17,16 @@
                 </div>
                 <div class="col-5">
                     <p class="display-3" style="margin: 0;">
-                        @if (Model[i].IsWholeNumber)
+                        @if ((Model[i].MathType == MathType.Decimal) || (Model[i].MathType == MathType.WholeNumber))
                         {
                             @Model[i].Operand1.ToString("N0")
                         }
                         else
                         {
-                            @Model[i].Operand1.ToString("N2")
+                            @Model[i].Operand1.ToString("N0")
                         }
                         @Model[i].Operator
-                        @if (Model[i].IsWholeNumber)
+                        @if (Model[i].MathType == MathType.Decimal)
                         {
                             @Model[i].Operand2
                         }

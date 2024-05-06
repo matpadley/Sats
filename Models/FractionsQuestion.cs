@@ -8,26 +8,25 @@ public class FractionsQuestion: ArithmaticBase
         Operator = AllOperator[random.Next(AllOperator.Length)];
         LeftNumerator = random.Next(1, 10);
         LeftDenominator = random.Next(1, 10);
-        RightNumerator = random.Next(1, 10);
-        RightDenominator = random.Next(1, 10);
-        
+        RightWholeNumber = random.Next(1, 10);
+
         switch (Operator)
         {
             case "+":
-                AnswerNumerator = LeftNumerator * RightDenominator + RightNumerator * LeftDenominator;
-                AnswerDenominator = LeftDenominator * RightDenominator;
+                AnswerNumerator = LeftNumerator + RightWholeNumber * LeftDenominator;
+                AnswerDenominator = LeftDenominator;
                 break;
             case "-":
-                AnswerNumerator = LeftNumerator * RightDenominator - RightNumerator * LeftDenominator;
-                AnswerDenominator = LeftDenominator * RightDenominator;
+                AnswerNumerator = LeftNumerator - RightWholeNumber * LeftDenominator;
+                AnswerDenominator = LeftDenominator;
                 break;
             case "x":
-                AnswerNumerator = LeftNumerator * RightNumerator;
-                AnswerDenominator = LeftDenominator * RightDenominator;
+                AnswerNumerator = LeftNumerator * RightWholeNumber;
+                AnswerDenominator = LeftDenominator;
                 break;
             case "/":
-                AnswerNumerator = LeftNumerator * RightDenominator;
-                AnswerDenominator = LeftDenominator * RightNumerator;
+                AnswerNumerator = LeftNumerator;
+                AnswerDenominator = LeftDenominator * RightWholeNumber;
                 break;
         }
         // correct the answer to the simplest form
@@ -35,7 +34,7 @@ public class FractionsQuestion: ArithmaticBase
         AnswerNumerator /= gcd;
         AnswerDenominator /= gcd;
     }
-    
+
     private int GCD(int a, int b)
     {
         while (b != 0)
@@ -46,14 +45,11 @@ public class FractionsQuestion: ArithmaticBase
         }
         return a;
     }
-    
-    // create a new model that will allow the same at ArithmeticQuestion, but for fractions
+
     public int LeftNumerator { get; }
     public int LeftDenominator { get; }
-    public int RightNumerator { get; }
-    public int RightDenominator { get; }
+    public int RightWholeNumber { get; }
     public string? Operator { get; }
     public int AnswerNumerator { get; }
     public int AnswerDenominator { get; }
-    
 }
