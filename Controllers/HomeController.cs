@@ -16,10 +16,11 @@ public class HomeController : Controller
     /// <returns>The view containing the list of arithmetic questions.</returns>
     public ActionResult Index()
     {
-        var questions = new List<ArithmeticQuestion>();
+        var random = new Random();
+        var questions = new List<ArithmeticQuestion>(random.Next(3));
         for (var i = 0; i < 36; i++)
         {
-            questions.Add(new ArithmeticQuestion());
+            questions.Add(new ArithmeticQuestion(random));
         }
         return View(questions);
     }

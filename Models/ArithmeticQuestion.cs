@@ -2,9 +2,8 @@ namespace Sats.Models;
 
 public class ArithmeticQuestion: ArithmaticBase
 {
-    public ArithmeticQuestion()
+    public ArithmeticQuestion(Random random)
     {
-        var random = new Random();
         MathType = (MathType)random.Next(3);
 
         Operand1 = Math.Round(random.NextDouble() * (1000 - 10) + 10, 2);
