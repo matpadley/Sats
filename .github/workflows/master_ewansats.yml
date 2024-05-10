@@ -4,12 +4,8 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - ewansats
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - '.github/**'
-  workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
   build:
